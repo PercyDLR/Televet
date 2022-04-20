@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
-    </head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/cabecera.html :: cabecera('Lista de Responsables')"></head>
     <body>
-
+        <head th:replace="fragments/navbar.html :: navbar('responsables')"></head>
+        <div class="container">
+            <h1>Lista de Responsables</h1>
+            <a class="btn btn-primary mt-4 mb-4" th:href="@{/responsables/nuevo}">Nuevo Responsable</a>
+            <div th:if="${msg!=null}" class="alert alert-success" th:text="${msg}"></div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="resp, info : ${listaResponsables}">
+                        <td th:text="${info.index + 1}"></td>
+                        <td th:text="${resp.nombre}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </body>
 </html>

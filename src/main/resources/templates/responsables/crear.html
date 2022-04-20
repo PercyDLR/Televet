@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/cabecera.html :: cabecera('Nuevo Responsable')"></head>
+    <body>
+        <div>
+            <head th:replace="fragments/navbar.html :: navbar('responsables')"></head>
+        </div>
+        <main>
+            <div class="container px-4 py-5">
+                <h1 class="pb-2 mb-4 border-bottom">Nuevo Responsable</h1>
+                <form method="post" th:action="@{/responsables/guardar}" class="col-4">
+                    <div class="mb-3">
+                        <label for="responsable" class="form-label">Nombre del responsable</label>
+                        <input name="nombre" type="text" class="form-control" id="responsable"/>
+                    </div>
+                    <a th:href="@{/responsables}" class="btn btn-danger">Cancelar</a>
+                    <button type="submit" class="btn btn-primary">Crear</button>
+                </form>
+            </div>
+        </main>
+    </body>
+</html>
