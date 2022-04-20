@@ -53,7 +53,7 @@
                                 <select class="form-select mb-3" name="dueno" >
                                     <option th:each="dueno : ${duenosList}"
                                             th:text="${dueno.correo}"
-                                            th:value="${dueno.id}"></option>
+                                            th:value="${dueno.id}" th:selected="${mascota.cuenta != null && dueno.id==mascota.cuenta.getId()}"></option>
                                 </select>
                             </div>
                             <a th:href="@{'/mascotas/lista'}"  class="btn btn-danger">Cancelar</a>
