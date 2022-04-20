@@ -12,7 +12,7 @@
                     <form method="post" th:action="@{'/mascotas/save'}" class="mt-2">
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Nombre:</label>
-                            <input type="email" class="form-control" name="nombre" id="nombre">
+                            <input type="text" class="form-control" name="nombre" id="nombre">
                         </div>
                         <div class="mb-3">
                             <label for="anho" class="form-label">Año:</label>
@@ -28,7 +28,10 @@
                         </div>
                         <div class="mb-3">
                             <label for="sexo" class="form-label">Sexo:</label>
-                            <input type="text" class="form-control" name="sexo" id="sexo">
+                            <select class="form-select mb-3" name="sexo" id="sexo">
+                                <option value="Femenino" th:text="${'Femenino'}"></option>
+                                <option value="Masculino"  th:text="${'Masculino'}"></option>
+                            </select>
                         </div>
 
                         <div class="mb-3">

@@ -77,6 +77,7 @@ public class MascotaController {
         Optional<Mascota> optMaskot = mr.findById(id);
         if (optMaskot.isPresent()) {
             mr.deleteById(id);
+            attr.addFlashAttribute("accion","alert-danger");
             attr.addFlashAttribute("msg", "Mascota borrada exitosamente");
         }
         return "redirect:/mascotas";
@@ -87,8 +88,10 @@ public class MascotaController {
     public String guardarMascota(Mascota mascota, Model model, RedirectAttributes attr) {
 
         if (mascota.getId() == 0) {
+            attr.addFlashAttribute("accion","alert-success");
             attr.addFlashAttribute("msg", "Mascota creado exitosamente");
         } else {
+            attr.addFlashAttribute("accion","alert-warning");
             attr.addFlashAttribute("msg", "Mascota actualizado exitosamente");
         }
         if (mascota.getNombre() != null) {

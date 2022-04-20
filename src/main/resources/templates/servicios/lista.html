@@ -6,10 +6,11 @@
     <div class="container">
         <nav th:replace="fragments/navbar.html :: navbar('servicios')">
         </nav>
-        <h1 class="pb-2 border-bottom">Lista de opciones</h1>
+        <h1 class="pb-2 border-bottom">Lista de Servicios</h1>
         <div class="d-flex mt-3 mb-4">
             <a class="btn btn-primary" th:href="@{'/servicios/nueva'}">Agregar opcion</a>
         </div>
+        <div th:class="'alert ' + ${accion}" th:text="${msg}" th:if="${msg != null && accion != null}"></div>
         <table class="table mb-5">
             <tr>
                 <th>#</th>

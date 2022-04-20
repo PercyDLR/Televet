@@ -32,7 +32,10 @@
                             </div>
                             <div class="mb-3">
                                 <label for="sexo" class="form-label">Sexo:</label>
-                                <input type="text" class="form-control" name="sexo" id="sexo" th:field="*{sexo}">
+                                <select class="form-select mb-3" th:field="*{sexo}" id="sexo">
+                                    <option value="Femenino" th:text="${'Femenino'}"></option>
+                                    <option value="Masculino"  th:text="${'Masculino'}"></option>
+                                </select>
                             </div>
 
                             <div class="mb-3">

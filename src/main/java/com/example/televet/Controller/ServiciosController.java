@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -62,22 +63,26 @@ public class ServiciosController {
     }
 
     @PostMapping("/editarOpcion")
-    public String editarOpcion(Opcion opcion){
+    public String editarOpcion(Opcion opcion,RedirectAttributes attr){
         Optional<Opcion> optionalOpcion = opcionRepository.findById(opcion.getId());
         if(optionalOpcion.isPresent()){
             Opcion opcionDB = optionalOpcion.get();
             opcionDB.setPrecio(opcion.getPrecio());
+            attr.addFlashAttribute("accion","alert-warning");
+            attr.addFlashAttribute("msg", "Opción actualizada exitosamente");
             opcionRepository.save(opcionDB);
         }
         return "redirect:/servicios/lista";
     }
 
     @PostMapping("/editarResponsable")
-    public String editarResponsable(Servicio servicio){
+    public String editarResponsable(Servicio servicio,RedirectAttributes attr){
         Optional<Servicio> optionalServicio = servicioRepository.findById(servicio.getId());
         if(optionalServicio.isPresent()){
             Servicio servicioDB = optionalServicio.get();
             servicioDB.setResponsable(servicio.getResponsable());
+            attr.addFlashAttribute("accion","alert-warning");
+            attr.addFlashAttribute("msg", "Responsable actualizado exitosamente");
             servicioRepository.save(servicioDB);
         }
         return "redirect:/servicios/lista";
@@ -89,7 +94,9 @@ public class ServiciosController {
     }
 
     @PostMapping("/nueva")
-    public String guardarOpcion(Opcion opcion){
+    public String guardarOpcion(Opcion opcion, RedirectAttributes attr){
+        attr.addFlashAttribute("accion","alert-success");
+        attr.addFlashAttribute("msg", "Opción creada exitosamente");
         opcionRepository.save(opcion);
         return "redirect:/servicios/lista";
     }
