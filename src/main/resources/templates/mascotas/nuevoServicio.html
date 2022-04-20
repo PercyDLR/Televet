@@ -41,12 +41,13 @@
             </div>
 
             <div class="mb-3">
-                <label for="opciones" class="form-label">Responsable </label>
+                <label for="opciones" class="form-label">Opciones </label>
                 <select class="form-select mb-3" name="opciones" id="opciones" multiple>
                     <option th:each="opcion : ${listaOpciones}"
                             th:text="${opcion.descripcion}"
                             th:value="${opcion.id}"></option>
                 </select>
+                <h6 style="color: red">Usar Ctrl para seleccionar más de uno.</h6>
             </div>
 
             <a th:href="@{'/servicios/lista'}" class="btn btn-danger">Cancelar</a>
