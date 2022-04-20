@@ -1,6 +1,6 @@
 package com.example.televet.Dto;
 
-public interface MascotasPorDueno {
+public interface MascotasPorDuenoDto {
     int getIdcuenta();
     String getCorreo();
     String getDireccion();

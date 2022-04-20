@@ -1,6 +1,6 @@
 package com.example.televet.Controller;
 
-import com.example.televet.Dto.MascotasPorDueno;
+import com.example.televet.Dto.MascotasPorDuenoDto;
 import com.example.televet.Entity.Cuenta;
 import com.example.televet.Repository.CuentaRepository;
 import com.example.televet.Repository.MascotaRepository;
@@ -26,7 +26,7 @@ public class DuenosController {
 
     @GetMapping(value = {"", "/lista"})
     public String listaDueno(Model model) {
-        List<MascotasPorDueno> duenosList = cuentaRepository.listaDuenos();
+        List<MascotasPorDuenoDto> duenosList = cuentaRepository.listaDuenos();
         model.addAttribute("duenosList",duenosList);
         return "duenos/lista";
     }

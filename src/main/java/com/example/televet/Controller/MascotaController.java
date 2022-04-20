@@ -3,16 +3,14 @@ package com.example.televet.Controller;
 import com.example.televet.Dto.ServiciosMascotasDto;
 import com.example.televet.Entity.Mascota;
 import com.example.televet.Entity.Raza;
+import com.example.televet.Repository.CuentaRepository;
 import com.example.televet.Repository.MascotaRepository;
 import com.example.televet.Repository.RazaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
@@ -25,6 +23,12 @@ public class MascotaController {
 
     @Autowired
     MascotaRepository mr;
+
+    @Autowired
+    CuentaRepository cr;
+
+    @Autowired
+    RazaRepository rr;
 
     @GetMapping(value = {"","/lista"})
     public String listado(@RequestParam(required=false,name="search") String search,
@@ -55,14 +59,11 @@ public class MascotaController {
         return "xd";
     }
 
-    @GetMapping("/crear")
-    public String agregarMascota(){
-        return "xd";
-    }
-
-    @GetMapping("/editar")
-    public String editarMascota(){
-        return "xd";
+    @GetMapping("/new")
+    public String agregarMascota(Model model){
+        model.addAttribute("duenosList",cr.findByAdmin(0));
+        model.addAttribute("razaList",rr.findAll());
+        return "mascotas/newForm";
     }
 
     @GetMapping("/delete")
@@ -76,6 +77,41 @@ public class MascotaController {
         }
         return "redirect:/mascotas";
 
+    }
+
+    @PostMapping("/save")
+    public String guardarMascota(Mascota mascota, Model model, RedirectAttributes attr) {
+
+        if (mascota.getId() == 0) {
+            attr.addFlashAttribute("msg", "Mascota creado exitosamente");
+        } else {
+            attr.addFlashAttribute("msg", "Mascota actualizado exitosamente");
+        }
+        if (mascota.getNombre() != null) {
+            mr.save(mascota);
+            return "redirect:/mascotas";
+        } else {
+            if (mascota.getId() != 0) {
+                model.addAttribute("mascota", mascota);
+                return "mascotas/editForm";
+            } else {
+                return "mascotas/newForm";
+            }
+        }
+    }
+
+    @GetMapping("/edit")
+    public String editarMascota(Model model, @RequestParam("id") int id) {
+        Optional<Mascota> optionalMascota = mr.findById(id);
+        if (optionalMascota.isPresent()) {
+            Mascota mascota = optionalMascota.get();
+            model.addAttribute("mascota",mascota);
+            model.addAttribute("duenosList",cr.findByAdmin(0));
+            model.addAttribute("razaList",rr.findAll());
+            return "mascotas/editForm";
+        } else {
+            return "redirect:/mascotas";
+        }
     }
 
 
