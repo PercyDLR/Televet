@@ -10,10 +10,10 @@
                 <h1 class="pb-2 border-bottom">Lista de Dueños</h1>
                 <div class="d-flex mt-3 mb-4">
                     <a class="btn btn-primary" th:href="@{'/duenos/new'}">Nuevo Contacto</a>
-                    <div th:if="${creada != null}" th:text="${creada}" class="alert alert-success" role="alert"></div>
-                    <div th:if="${editada != null}" th:text="${editada}" class="alert alert-warning" role="alert"></div>
                     <a class="btn btn-secondary ms-auto" th:href="@{'/'}">Regresar</a>
                 </div>
+                <div th:class="'alert ' + ${accion}" th:text="${msg}" th:if="${msg != null && accion != null}"></div>
+
 
                 <table class="table">
                     <tr>

@@ -40,9 +40,11 @@ public class DuenosController {
     public String guardarDueno(Cuenta cuenta, Model model, RedirectAttributes attr) {
         cuenta.setAdmin(0);
         if (cuenta.getId() == null) {
-            attr.addFlashAttribute("msg", "Producto creado exitosamente");
+            attr.addFlashAttribute("accion","alert-success");
+            attr.addFlashAttribute("msg", "Contacto creado exitosamente");
         } else {
-            attr.addFlashAttribute("msg", "Producto actualizado exitosamente");
+            attr.addFlashAttribute("accion","alert-warning");
+            attr.addFlashAttribute("msg", "Contacto actualizado exitosamente");
         }
         if (cuenta.getCorreo() != null && cuenta.getPassword() != null) {
             cuentaRepository.save(cuenta);

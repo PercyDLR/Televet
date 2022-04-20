@@ -15,11 +15,11 @@ public interface MascotaRepository extends JpaRepository<Mascota,Integer> {
     @Query(value = "SELECT * FROM mascota where cuenta_idcuenta = ?1", nativeQuery = true)
     List<Mascota> mascotaList(int cuenta_idcuenta);
 
-    @Query(value="Select m.idmascota,m.nombre,m.anho,m.sexo,r.idraza,m.raza_otros as razaotros,r.descripcion as raza, count(s.idservicio) as cantidadservicios from mascota m \n" +
+    @Query(value="Select m.idmascota,m.nombre,m.anho,m.sexo,r.idraza,m.raza_otros as razaotros,r.descripcion as raza, count(s.idservicio) as cantidadservicios from mascota m\n" +
             "left join servicio s on (s.mascota_idmascota=m.idmascota)\n" +
             "left join raza_especie r on (r.idraza=m.raza_especie_idraza)\n" +
-            "group by m.idmascota", nativeQuery = true)
-    List<ServiciosMascotasDto> listaContadorServicios();
+            "where idmascota = ?1", nativeQuery = true)
+    List<ServiciosMascotasDto> listaContadorServiciosPorMascota(int id);
 
     @Query(value="Select m.idmascota,m.nombre,m.anho,m.sexo,r.idraza,m.raza_otros as razaotros,r.descripcion as raza, count(s.idservicio) as cantidadservicios from mascota m \n" +
             "left join servicio s on (s.mascota_idmascota=m.idmascota)\n" +

@@ -76,29 +76,31 @@ public class MascotaController {
     }
 
     @GetMapping("/delete")
-    public String borrarTransportista(@RequestParam("id") int id,
+    public String borrarMascota(@RequestParam("id") int id,
                                       RedirectAttributes attr) {
 
         Optional<Mascota> optMaskot = mr.findById(id);
-        if (optMaskot.isPresent()) {
+        if (optMaskot.isPresent() && mr.listaContadorServiciosPorMascota(id).get(0).getCantidadservicios() == 0) {
             mr.deleteById(id);
             attr.addFlashAttribute("accion","alert-danger");
             attr.addFlashAttribute("msg", "Mascota borrada exitosamente");
+        }else{
+            attr.addFlashAttribute("accion","alert-danger");
+            attr.addFlashAttribute("msg", "La mascota contiene servicios, no se puede eliminar.");
         }
         return "redirect:/mascotas";
 
     }
-
 
     @PostMapping("/save")
     public String guardarMascota(Mascota mascota, Model model, RedirectAttributes attr) {
 
         if (mascota.getId() == 0) {
             attr.addFlashAttribute("accion","alert-success");
-            attr.addFlashAttribute("msg", "Mascota creado exitosamente");
+            attr.addFlashAttribute("msg", "Mascota creada exitosamente");
         } else {
             attr.addFlashAttribute("accion","alert-warning");
-            attr.addFlashAttribute("msg", "Mascota actualizado exitosamente");
+            attr.addFlashAttribute("msg", "Mascota actualizada exitosamente");
         }
         if (mascota.getNombre() != null) {
             mr.save(mascota);

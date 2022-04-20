@@ -9,8 +9,8 @@
                     <nav th:replace="fragments/navbar.html :: navbar('dueños')">
                     </nav>
                     <div class="form-group col-6">
-                        <div class="container">
-                            <h1 class="pb-2 border-bottom">Editar Contacto</h1>
+                        <div class="container col-md-6 offset-md-3">
+                            <h1 class="col-md-6 offset-md-3 border-bottom">Editar Contacto</h1>
                         </div>
                         <form method="post" th:action="@{'/duenos/save'}"  th:object="${dueno}">
                             <input type="hidden" th:field="*{id}"/>
