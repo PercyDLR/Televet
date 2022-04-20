@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -26,10 +23,11 @@ public class MascotaController {
 
         model.addAttribute("listaMascotas",mr.findAll());
         model.addAttribute("busqueda", null);
+        model.addAttribute("filtro", "");
         return "mascotas/lista";
     }
 
-    @GetMapping("/buscar")
+    @PostMapping("/buscar")
     public String listado(Model model, @RequestParam("filtro") String filtro,
                           @RequestParam("busqueda") String busqueda){
 
@@ -38,17 +36,38 @@ public class MascotaController {
                 model.addAttribute("listaMascotas",mr.findAll());
                 break;
             case "sexo":
-                //model.addAttribute("listaMascotas",mr.findBySexo(busqueda));
+                model.addAttribute("listaMascotas",mr.findBySexoContainingIgnoreCase(busqueda));
                 break;
             case "raza":
-                //model.addAttribute("listaMascotas",mr.());
+                model.addAttribute("listaMascotas",mr.findByRazaDescripcionOrOtrosContainingIgnoreCase(busqueda,busqueda));
                 break;
             case "contacto":
                 break;
             default:
                 return "redirect:/mascotas";
         }
-
+        model.addAttribute("busqueda", busqueda);
+        model.addAttribute("filtro", filtro);
         return "mascotas/lista";
+    }
+
+    @GetMapping("/info")
+    public String detalleServicios(Model model, @RequestParam("id") int id){
+        return "xd";
+    }
+
+    @GetMapping("/crear")
+    public String agregarMascota(){
+        return "xd";
+    }
+
+    @GetMapping("/editar")
+    public String editarMascota(){
+        return "xd";
+    }
+
+    @GetMapping("/borrar")
+    public String borrarMascota(){
+        return "xd";
     }
 }

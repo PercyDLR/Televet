@@ -2,26 +2,30 @@
 
     <head th:replace="fragments/cabecera :: cabecera('Lista de Mascotas en Televet')"></head>
     <body>
+
         <div class="container">
-            <h1>Lista de Mascotas en Televet</h1>
+            <div th:replace="fragments/navbar :: navbar('mascotas')"></div>
+
+            <h1 th:if="${filtro == ''}">Lista de Mascotas en Televet</h1>
+            <h1 th:if="${filtro != ''}" th:text="'Buscando '+${busqueda}+' por '+${filtro}"></h1>
+
             <a class="btn btn-primary mt-4 mb-4" th:href="@{/mascotas/crear}">Nueva Mascota</a>  <!-- COMPLETAR -->
 
             <!--
             <div class="alert alert-success" th:text="${msg}" th:if="${msg != null}"></div>
+            <div class="alert alert-danger" th:text="${err}" th:if="${err != null}"></div>
             -->
 
             <form method="post" th:action="@{/mascotas/buscar}">
                 <div class="input-group">
                     <select name="filtro">
-                        <option value="" selected>Todos</option>
+                        <option value="">Todos</option>
                         <option value="sexo">Sexo</option>
                         <option value="raza">Raza</option>
                         <option value="contacto">Contacto</option>
                     </select>
                     <input name="busqueda" th:value="${busqueda == null ? null : busqueda}" class="form-control" type="text" placeholder="Buscar"/>
-                    <button type="submit" class="btn btn-secondary">
-                        <i class="bi bi-search"></i>
-                    </button>
+                    <button type="submit" class="btn btn-secondary">Buscar</button>
                 </div>
             </form>
 
@@ -34,7 +38,7 @@
                         <th>Sexo</th>
                         <th>Raza</th>
                         <th>Servicios</th>
-                        <th></th>
+                        <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,8 +50,12 @@
                         <td th:text="${mascota.getRaza().getId() == 20 ? mascota.otros : mascota.raza.descripcion}"></td>
                         <td></td>
 
-                        <td><a class="btn btn-primary" th:href="@{'/mascota/edit?id=' + ${mascota.id}}">
+                        <td><a class="btn btn-primary" th:href="@{'/mascota/info?id=' + ${mascota.id}}">
                             Detalle de Servicios</a></td>
+                        <td><a class="btn btn-warning" th:href="@{'/mascota/editar?id=' + ${mascota.id}}">
+                            Editar</a></td>
+                        <td><a class="btn btn-danger" th:href="@{'/mascota/borrar?id=' + ${mascota.id}}">
+                            Eliminar</a></td>
                     </tr>
                 </tbody>
             </table>

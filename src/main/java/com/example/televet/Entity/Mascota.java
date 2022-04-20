@@ -21,7 +21,7 @@ public class Mascota{
     private String nombre;
 
     @Column(name = "anho")
-    private int anho;
+    private String anho;
 
     @Column(name = "historia")
     private String historia;
