@@ -67,7 +67,6 @@ public class MascotaController {
         if(optionalMascota.isPresent()) {
             model.addAttribute("mascota", optionalMascota.get());
             List<Servicio> servicioList = servicioRepository.listaMascota(id);
-            System.out.println(servicioList.size());
             model.addAttribute("listaServicios", servicioList);
             model.addAttribute("edad", servicioRepository.edad(id));
             return "mascotas/details";

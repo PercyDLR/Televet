@@ -7,59 +7,57 @@
             <div class="container">
                 <nav th:replace="fragments/navbar.html :: navbar('mascotas')">
                 </nav>
-                <div class="row">
-                    <div class="form-group col-6">
-                        <div class="container">
-                            <h1 class="pb-2 border-bottom">Editar Mascota</h1>
-                        </div>
-                        <form method="post" th:action="@{'/mascotas/save'}"  th:object="${mascota}">
-                            <input type="hidden" th:field="*{id}"/>
-                            <div class="mb-3">
-                                <label class="form-label">Nombre:</label>
-                                <input type="text" class="form-control" name="nombre" th:field="*{nombre}">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Año:</label>
-                                <input type="text" class="form-control" name="anho" th:field="*{anho}">
-                            </div>
-                            <div class="mb-3">
-                                <label for="historia" class="form-label">Historia:</label>
-                                <textarea class="form-control" name="historia" id="historia" th:field="*{historia}"></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label for="observaciones" class="form-label">Observaciones:</label>
-                                <textarea class="form-control" name="observaciones" id="observaciones" th:field="*{observaciones}"></textarea>
-
-                            </div>
-                            <div class="mb-3">
-                                <label for="sexo" class="form-label">Sexo:</label>
-                                <select class="form-select mb-3" th:field="*{sexo}" id="sexo">
-                                    <option value="Femenino" th:text="${'Femenino'}"></option>
-                                    <option value="Masculino"  th:text="${'Masculino'}"></option>
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="raza" class="form-label">Raza: </label>
-                                <select class="form-select mb-3" name="raza" id="raza">
-                                    <option th:each="raza : ${razaList}"
-                                            th:text="${raza.descripcion}"
-                                            th:value="${raza.id}" th:selected="${raza.id==mascota.raza.getId()}"></option>
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label  class="form-label">Dueño: </label>
-                                <select class="form-select mb-3" name="dueno" >
-                                    <option th:each="dueno : ${duenosList}"
-                                            th:text="${dueno.correo}"
-                                            th:value="${dueno.id}" th:selected="${mascota.cuenta != null && dueno.id==mascota.cuenta.getId()}"></option>
-                                </select>
-                            </div>
-                            <a th:href="@{'/mascotas/lista'}"  class="btn btn-danger">Cancelar</a>
-                            <button type="submit" class="btn btn-primary">Guardar</button>
-                        </form>
+                <div class="form-group col-md-6 offset-md-3 ">
+                    <div class="container">
+                        <h1 class="pb-2 border-bottom">Editar Mascota</h1>
                     </div>
+                    <form method="post" th:action="@{'/mascotas/save'}"  th:object="${mascota}">
+                        <input type="hidden" th:field="*{id}"/>
+                        <div class="mb-3">
+                            <label class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" name="nombre" th:field="*{nombre}">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Año:</label>
+                            <input type="text" class="form-control" name="anho" th:field="*{anho}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="historia" class="form-label">Historia:</label>
+                            <textarea class="form-control" name="historia" id="historia" th:field="*{historia}"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="observaciones" class="form-label">Observaciones:</label>
+                            <textarea class="form-control" name="observaciones" id="observaciones" th:field="*{observaciones}"></textarea>
+
+                        </div>
+                        <div class="mb-3">
+                            <label for="sexo" class="form-label">Sexo:</label>
+                            <select class="form-select mb-3" th:field="*{sexo}" id="sexo">
+                                <option value="Femenino" th:text="${'Femenino'}"></option>
+                                <option value="Masculino"  th:text="${'Masculino'}"></option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="raza" class="form-label">Raza: </label>
+                            <select class="form-select mb-3" name="raza" id="raza">
+                                <option th:each="raza : ${razaList}"
+                                        th:text="${raza.descripcion}"
+                                        th:value="${raza.id}" th:selected="${raza.id==mascota.raza.getId()}"></option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label  class="form-label">Dueño: </label>
+                            <select class="form-select mb-3" name="dueno" >
+                                <option th:each="dueno : ${duenosList}"
+                                        th:text="${dueno.correo}"
+                                        th:value="${dueno.id}" th:selected="${mascota.cuenta != null && dueno.id==mascota.cuenta.getId()}"></option>
+                            </select>
+                        </div>
+                        <a th:href="@{'/mascotas/lista'}"  class="btn btn-danger">Cancelar</a>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
                 </div>
             </div>
         </main>
