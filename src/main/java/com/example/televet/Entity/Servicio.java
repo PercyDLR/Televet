@@ -18,13 +18,13 @@ public class Servicio {
     @Column(name = "idservicio", nullable = false)
     private int id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "mascota_idmascota", nullable = false)
-    private Mascota mascotaIdmascota;
+    @ManyToOne
+    @JoinColumn(name = "mascota_idmascota")
+    private Mascota mascota;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "cuenta_idcuenta", nullable = false)
-    private Cuenta cuentaIdcuenta;
+    private Cuenta cuenta;
 
     @Column(name = "hora_inicio", nullable = false)
     private Instant horaInicio;
@@ -38,7 +38,7 @@ public class Servicio {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "responsable_idresponsable", nullable = false)
-    private Responsable responsableIdresponsable;
+    private Responsable responsable;
 
 
     @ManyToMany

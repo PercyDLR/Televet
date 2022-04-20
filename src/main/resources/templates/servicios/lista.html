@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/cabecera.html :: cabecera('Televet')">
 </head>
 <body>
-    <nav th:replace="fragments/navbar.html :: navbar('')">
+    <nav th:replace="fragments/navbar.html :: navbar('servicios')">
     </nav>
     <div class="container px-4 py-5">
         <h1 class="pb-2 border-bottom">Lista de opciones</h1>
         <div class="d-flex mt-3 mb-4">
-            <a class="btn btn-primary" th:href="@{'/opcion/crear'}">Agregar opcion</a>
+            <a class="btn btn-primary" th:href="@{'/servicios/nueva'}">Agregar opcion</a>
         </div>
         <table class="table mb-5">
             <tr>
@@ -17,42 +16,23 @@
                 <th>Descripción</th>
                 <th class="text-center">Tiempo</th>
                 <th class="text-center">Precio</th>
+                <th >Responsable</th>
                 <th></th>
             </tr>
             <tr th:each="opcion, info : ${opcionList}">
                 <td th:text="${info.index + 1}"></td>
-                <td th:text="${opcion.descripcion}"></td>
-                <td th:text="|${opcion.tiempoMinutos} min|" class="text-center"></td>
-                <td th:text="|S/ ${opcion.precio}|" class="text-center"></td>
+                <td th:text="${opcion.getDescripcion()}"></td>
+                <td th:text="|${opcion.getTiempominutos()} min|" class="text-center"></td>
+                <td th:text="|S/ ${opcion.getPrecio()}|" class="text-center"></td>
+                <td th:text="${opcion.getResponsable()}!=null? ${opcion.getResponsable()}: ''" ></td>
 
-                <td class="text-center"><a class="btn btn-primary" th:href="@{'/servicios/editar' + '?id=' + ${opcion.id}}">Editar</a>
+                <td class="text-center"><a class="btn btn-primary" th:href="@{/servicios/editar(idOpcion=${opcion.getIdopcion()},idServicio=${opcion.getIdservicio()})}">Editar</a>
                 </td>
             </tr>
         </table>
-    </div>
-    <div class="container px-4 py-5">
-        <h1 class="pb-2 border-bottom">Lista de servicios</h1>
-        <div class="d-flex mt-3 mb-4">
-            <a class="btn btn-primary" th:href="@{'/opcion/crear'}">Agregar servicio</a>
-        </div>
-        <table class="table mb-5">
-            <tr>
-                <th>#</th>
-                <th>Descripción</th>
-                <th class="text-center">Tiempo</th>
-                <th class="text-center">Precio</th>
-                <th></th>
-            </tr>
-            <tr th:each="opcion, info : ${opcionList}">
-                <td th:text="${info.index + 1}"></td>
-                <td th:text="${opcion.descripcion}"></td>
-                <td th:text="|${opcion.tiempoMinutos} min|" class="text-center"></td>
-                <td th:text="|S/ ${opcion.precio}|" class="text-center"></td>
 
-                <td class="text-center"><a class="btn btn-primary" th:href="@{'/servicios/editar' + '?id=' + ${opcion.id}}">Editar</a>
-                </td>
-            </tr>
-        </table>
-    </div>
+
+
+
 </body>
 </html>
