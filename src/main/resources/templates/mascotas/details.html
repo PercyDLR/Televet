@@ -21,7 +21,7 @@
             <table class="table" th:if="${listaServicios.size()>0}">
                 <thead>
                     <tr>
-                        <th>ID Servicio</th>
+                        <th>N° de visitas</th>
                         <th>Hora de inicio</th>
                         <th>Duracion</th>
                         <th>Entrega</th>
@@ -31,7 +31,7 @@
                 </thead>
                 <tbody>
                     <tr th:each="servicio, info : ${listaServicios}">
-                        <td th:text="${servicio.id}"></td>
+                        <td th:text="${info.index+1}"></td>
                         <td th:text="${servicio.horaInicio}"></td>
                         <td th:text="${servicio.duracion}"></td>
                         <td th:text="${servicio.entrega}"></td>
