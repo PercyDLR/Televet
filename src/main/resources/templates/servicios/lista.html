@@ -1,10 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
-    </head>
-    <body>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/cabecera.html :: cabecera('Televet')">
+</head>
+<body>
+    <nav th:replace="fragments/navbar.html :: navbar('')">
+    </nav>
+    <div class="container px-4 py-5">
+        <h1 class="pb-2 border-bottom">Lista de opciones</h1>
+        <div class="d-flex mt-3 mb-4">
+            <a class="btn btn-primary" th:href="@{'/opcion/crear'}">Agregar opcion</a>
+        </div>
+        <table class="table mb-5">
+            <tr>
+                <th>#</th>
+                <th>Descripción</th>
+                <th class="text-center">Tiempo</th>
+                <th class="text-center">Precio</th>
+                <th></th>
+            </tr>
+            <tr th:each="opcion, info : ${opcionList}">
+                <td th:text="${info.index + 1}"></td>
+                <td th:text="${opcion.descripcion}"></td>
+                <td th:text="|${opcion.tiempoMinutos} min|" class="text-center"></td>
+                <td th:text="|S/ ${opcion.precio}|" class="text-center"></td>
 
-    </body>
+                <td class="text-center"><a class="btn btn-primary" th:href="@{'/servicios/editar' + '?id=' + ${opcion.id}}">Editar</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="container px-4 py-5">
+        <h1 class="pb-2 border-bottom">Lista de servicios</h1>
+        <div class="d-flex mt-3 mb-4">
+            <a class="btn btn-primary" th:href="@{'/opcion/crear'}">Agregar servicio</a>
+        </div>
+        <table class="table mb-5">
+            <tr>
+                <th>#</th>
+                <th>Descripción</th>
+                <th class="text-center">Tiempo</th>
+                <th class="text-center">Precio</th>
+                <th></th>
+            </tr>
+            <tr th:each="opcion, info : ${opcionList}">
+                <td th:text="${info.index + 1}"></td>
+                <td th:text="${opcion.descripcion}"></td>
+                <td th:text="|${opcion.tiempoMinutos} min|" class="text-center"></td>
+                <td th:text="|S/ ${opcion.precio}|" class="text-center"></td>
+
+                <td class="text-center"><a class="btn btn-primary" th:href="@{'/servicios/editar' + '?id=' + ${opcion.id}}">Editar</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
 </html>
