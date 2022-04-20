@@ -13,7 +13,7 @@
                     <a type="button" class="btn btn-primary" th:href="@{/mascotas}">Regresar</a>
                 </div>
             </div>
-            <div th:class="alert-success" th:text="${msg}" th:if="${msg != null}"></div>
+            <div th:if="${msg!=null}" class="alert alert-success" th:text="${msg}"></div>
             <br>
             <h4 th:text="'Nombre de la Mascota: '+${mascota.nombre}"></h4>
             <h4 th:text="'Edad: '+${edad}"></h4>
