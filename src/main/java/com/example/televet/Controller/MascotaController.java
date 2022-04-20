@@ -60,6 +60,8 @@ public class MascotaController {
 
     @GetMapping("/info")
     public String detalleServicios(Model model, @RequestParam("id") int id){
+        model.addAttribute("listaServicios", servicioRepository.listaMascota(id));
+        model.addAttribute("edad", servicioRepository.edad(id));
         return "mascotas/details";
     }
 
