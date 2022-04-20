@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -27,7 +28,7 @@ public class Servicio {
     private Cuenta cuenta;
 
     @Column(name = "hora_inicio", nullable = false)
-    private Instant horaInicio;
+    private LocalDateTime horaInicio;
 
     @Column(name = "duracion", nullable = false)
     private Integer duracion;

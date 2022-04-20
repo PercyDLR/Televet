@@ -1,5 +1,6 @@
 package com.example.televet.Controller;
 
+import com.example.televet.Dto.ServiciosMascotasDto;
 import com.example.televet.Entity.Mascota;
 import com.example.televet.Entity.Raza;
 import com.example.televet.Repository.MascotaRepository;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -24,34 +27,26 @@ public class MascotaController {
     MascotaRepository mr;
 
     @GetMapping(value = {"","/lista"})
-    public String listado(Model model){
-
-        model.addAttribute("listaServicios",mr.listaContadorServicios());
-        model.addAttribute("busqueda", null);
-        return "mascotas/lista";
-    }
-
-    @GetMapping("/buscar")
-    public String listado(Model model, @RequestParam("filtro") String filtro,
-                          @RequestParam("busqueda") String busqueda){
-
+    public String listado(@RequestParam(required=false,name="search") String search,
+                          @RequestParam(required=false,name="filtro") String filtro,
+                          Model model){
+        List<ServiciosMascotasDto> mascotaList;
+        if(filtro==null){filtro="";}
+        if(search==null){search="";}
         switch(filtro){
-            case "":
-                model.addAttribute("listaMascotas",mr.findAll());
-                break;
             case "sexo":
-                //model.addAttribute("listaMascotas",mr.findBySexo(busqueda));
+                mascotaList =mr.listaSexo(search);
                 break;
             case "raza":
-                //model.addAttribute("listaMascotas",mr.());
+                mascotaList =mr.listaRaza(search);
                 break;
             case "contacto":
+                mascotaList =mr.listaCuenta(search);
                 break;
             default:
-                return "redirect:/mascotas";
+                mascotaList =mr.listaContadorServicios(search);
         }
-        model.addAttribute("busqueda", busqueda);
-        model.addAttribute("filtro", filtro);
+        model.addAttribute("listaMascotas",mascotaList);
         return "mascotas/lista";
     }
 

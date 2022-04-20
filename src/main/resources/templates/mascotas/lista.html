@@ -6,8 +6,8 @@
         <div class="container">
             <div th:replace="fragments/navbar :: navbar('mascotas')"></div>
 
-            <h1 th:if="${filtro == ''}">Lista de Mascotas en Televet</h1>
-            <h1 th:if="${filtro != ''}" th:text="'Buscando '+${busqueda}+' por '+${filtro}"></h1>
+            <h1 >Lista de Mascotas en Televet</h1>
+            <h1 ></h1>
 
             <a class="btn btn-primary mt-4 mb-4" th:href="@{/mascotas/crear}">Nueva Mascota</a>  <!-- COMPLETAR -->
 
@@ -16,15 +16,15 @@
             <div class="alert alert-danger" th:text="${err}" th:if="${err != null}"></div>
             -->
 
-            <form method="post" th:action="@{/mascotas/buscar}">
+            <form th:action="@{/mascotas}">
                 <div class="input-group">
-                    <select name="filtro">
+                    <select class="form-select w-25" name="filtro">
                         <option value="">Todos</option>
-                        <option value="sexo">Sexo</option>
-                        <option value="raza">Raza</option>
-                        <option value="contacto">Contacto</option>
+                        <option value="sexo" th:selected="${#httpServletRequest.getParameter('filtro') == 'sexo'}">Sexo</option>
+                        <option value="raza" th:selected="${#httpServletRequest.getParameter('filtro') == 'raza'}">Raza</option>
+                        <option value="contacto" th:selected="${#httpServletRequest.getParameter('filtro') == 'contacto'}">Contacto</option>
                     </select>
-                    <input name="busqueda" th:value="${busqueda == null ? null : busqueda}" class="form-control" type="text" placeholder="Buscar"/>
+                    <input name="search" th:value="${param.search}" class="form-control" type="text" placeholder="Buscar"/>
                     <button type="submit" class="btn btn-secondary">Buscar</button>
                 </div>
             </form>
@@ -42,7 +42,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="mascota, info : ${listaServicios}">
+                    <tr th:each="mascota, info : ${listaMascotas}">
                         <td th:text="${info.index + 1}"></td>
                         <td th:text="${mascota.getNombre()}"></td>
                         <td th:text="${mascota.getAnho()}"></td>
