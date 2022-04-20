@@ -3,10 +3,7 @@ package com.example.televet.Controller;
 import com.example.televet.Dto.ServiciosMascotasDto;
 import com.example.televet.Entity.Mascota;
 import com.example.televet.Entity.Raza;
-import com.example.televet.Repository.CuentaRepository;
-import com.example.televet.Repository.MascotaRepository;
-import com.example.televet.Repository.RazaRepository;
-import com.example.televet.Repository.ServicioRepository;
+import com.example.televet.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -33,6 +30,12 @@ public class MascotaController {
 
     @Autowired
     ServicioRepository servicioRepository;
+
+    @Autowired
+    OpcionRepository opcionRepository;
+
+    @Autowired
+    ResponsableRepository responsableRepository;
 
     @GetMapping(value = {"","/lista"})
     public String listado(@RequestParam(required=false,name="search") String search,
@@ -86,6 +89,7 @@ public class MascotaController {
 
     }
 
+
     @PostMapping("/save")
     public String guardarMascota(Mascota mascota, Model model, RedirectAttributes attr) {
 
@@ -131,6 +135,9 @@ public class MascotaController {
         Optional<Mascota> mascota = mr.findById(id);
 
         if(mascota.isPresent()){
+            model.addAttribute("listaDuenos", cr.findAll());
+            model.addAttribute("listaResponsables", responsableRepository.findAll());
+            model.addAttribute("listaOpciones",opcionRepository.findAll());
             model.addAttribute("infoMascota",mascota.get());
             return "mascotas/nuevoServicio";
         }

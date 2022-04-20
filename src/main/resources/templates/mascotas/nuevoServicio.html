@@ -9,12 +9,12 @@
     <div class="col col-6">
         <h1 class="pb-2 mb-3 border-bottom">Nuevo servicio</h1>
         <form method="post" th:action="@{'/servicios/nueva'}" class="mt-2 mb-4" >
-            <input hidden th:value="${param.id}" name="mascota">
+            <input hidden th:value="${infoMascota.id}" name="mascota">
 
             <div class="mb-3">
                 <label for="cuenta" class="form-label">Cuenta </label>
                 <select class="form-select mb-3" name="cuenta" id="cuenta">
-                    <option th:each="dueno : ${duenosList}"
+                    <option th:each="dueno : ${listaDuenos}"
                             th:text="${dueno.correo}"
                             th:value="${dueno.id}"></option>
                 </select>
@@ -22,7 +22,7 @@
             <div class="mb-3">
                 <label for="responsable" class="form-label">Responsable </label>
                 <select class="form-select mb-3" name="responsable" id="responsable">
-                    <option th:each="responsable : ${responsableList}"
+                    <option th:each="responsable : ${listaResponsables}"
                             th:text="${responsable.nombre}"
                             th:value="${responsable.idresponsable}"></option>
                 </select>
@@ -43,7 +43,7 @@
             <div class="mb-3">
                 <label for="opciones" class="form-label">Opciones </label>
                 <select class="form-select mb-3" name="opciones" id="opciones" multiple>
-                    <option th:each="opcion : ${opcionesList}"
+                    <option th:each="opcion : ${listaOpciones}"
                             th:text="${opcion.descripcion}"
                             th:value="${opcion.id}"></option>
                 </select>
