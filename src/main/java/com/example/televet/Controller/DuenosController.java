@@ -69,6 +69,4 @@ public class DuenosController {
             return "redirect:/duenos";
         }
     }
-
-
 }

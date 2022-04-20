@@ -71,8 +71,7 @@ public class MascotaController {
     }
 
     @GetMapping("/delete")
-    public String borrarTransportista(Model model,
-                                      @RequestParam("id") int id,
+    public String borrarTransportista(@RequestParam("id") int id,
                                       RedirectAttributes attr) {
 
         Optional<Mascota> optMaskot = mr.findById(id);
