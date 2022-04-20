@@ -2,7 +2,9 @@ package com.example.televet.Controller;
 
 import com.example.televet.Dto.ServiciosMascotasDto;
 import com.example.televet.Entity.Mascota;
+import com.example.televet.Entity.Opcion;
 import com.example.televet.Entity.Raza;
+import com.example.televet.Entity.Servicio;
 import com.example.televet.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -63,9 +66,17 @@ public class MascotaController {
 
     @GetMapping("/info")
     public String detalleServicios(Model model, @RequestParam("id") int id){
-        model.addAttribute("listaServicios", servicioRepository.listaMascota(id));
-        model.addAttribute("edad", servicioRepository.edad(id));
-        return "mascotas/details";
+        Optional<Mascota> optionalMascota = mr.findById(id);
+        if(optionalMascota.isPresent()) {
+            model.addAttribute("mascota", optionalMascota.get());
+            List<Servicio> servicioList = servicioRepository.listaMascota(id);
+            System.out.println(servicioList.size());
+            model.addAttribute("listaServicios", servicioList);
+            model.addAttribute("edad", servicioRepository.edad(id));
+            return "mascotas/details";
+        }else{
+            return "redirect:/mascotas";
+        }
     }
 
     @GetMapping("/new")
@@ -144,5 +155,13 @@ public class MascotaController {
         attr.addFlashAttribute("accion","alert-danger");
         attr.addFlashAttribute("msg", "El id ingresado no es válido. Inténtelo nuevamente");
         return "redirect:/mascotas";
+    }
+
+    @PostMapping("/nuevoServicio")
+    public String saveService(Servicio servicio, RedirectAttributes attr){
+        servicio.setHoraInicio(LocalDateTime.now());
+        servicioRepository.save(servicio);
+        attr.addFlashAttribute("msg", "Se ha creado el servicio");
+        return "redirect:/mascotas/info?id="+servicio.getMascota().getId();
     }
 }

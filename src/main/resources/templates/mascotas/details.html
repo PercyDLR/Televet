@@ -13,11 +13,12 @@
                     <a type="button" class="btn btn-primary" th:href="@{/mascotas}">Regresar</a>
                 </div>
             </div>
+            <div th:class="alert-success" th:text="${msg}" th:if="${msg != null}"></div>
             <br>
-            <h4 th:text="'Nombre de la Mascota: '+${listaServicios.get(0).mascota.nombre}"></h4>
+            <h4 th:text="'Nombre de la Mascota: '+${mascota.nombre}"></h4>
             <h4 th:text="'Edad: '+${edad}"></h4>
-            <a type="button" class="btn btn-success" th:href="@{'/mascotas/servicio?id='+${listaServicios.get(0).mascota.id}}">Nuevo Servicio</a>
-            <table class="table">
+            <a type="button" class="btn btn-success" th:href="@{'/mascotas/servicio?id='+${mascota.id}}">Nuevo Servicio</a>
+            <table class="table" th:if="${listaServicios.size()>0}">
                 <thead>
                     <tr>
                         <th>ID Servicio</th>
@@ -43,6 +44,7 @@
                     </tr>
                 </tbody>
             </table>
+            <h4 class="text-danger my-3" th:if="${listaServicios.size()==0}"> Esta mascota aun no tiene servicios</h4>
         </div>
     </body>
 </html>
