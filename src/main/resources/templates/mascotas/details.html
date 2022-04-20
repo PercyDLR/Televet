@@ -14,8 +14,9 @@
                 </div>
             </div>
             <br>
-            <h4 th:text="'Nombre de la Mascota: '+${listaServicios.get(0).getMascota().nombre}"></h4>
+            <h4 th:text="'Nombre de la Mascota: '+${listaServicios.get(0).mascota.nombre}"></h4>
             <h4 th:text="'Edad: '+${edad}"></h4>
+            <a type="button" class="btn btn-success" th:href="@{'/mascotas/servicio?id='+${listaServicios.get(0).mascota.id}}">Nuevo Servicio</a>
             <table class="table">
                 <thead>
                     <tr>

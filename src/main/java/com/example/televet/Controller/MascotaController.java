@@ -125,5 +125,17 @@ public class MascotaController {
         }
     }
 
+    @GetMapping("/servicio")
+    public String newService(@RequestParam("id") int id, Model model,
+                             RedirectAttributes attr){
+        Optional<Mascota> mascota = mr.findById(id);
 
+        if(mascota.isPresent()){
+            model.addAttribute("infoMascota",mascota.get());
+            return "mascotas/nuevoServicio";
+        }
+        attr.addFlashAttribute("accion","alert-danger");
+        attr.addFlashAttribute("msg", "El id ingresado no es válido. Inténtelo nuevamente");
+        return "redirect:/mascotas";
+    }
 }
