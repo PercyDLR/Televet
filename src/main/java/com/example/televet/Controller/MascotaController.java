@@ -1,10 +1,7 @@
 package com.example.televet.Controller;
 
 import com.example.televet.Dto.ServiciosMascotasDto;
-import com.example.televet.Entity.Mascota;
-import com.example.televet.Entity.Opcion;
-import com.example.televet.Entity.Raza;
-import com.example.televet.Entity.Servicio;
+import com.example.televet.Entity.*;
 import com.example.televet.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -79,9 +76,19 @@ public class MascotaController {
         }
     }
 
+    public List<Cuenta> getListaDuenos() {
+        List<Cuenta> duenosList = cr.findByAdmin(0);
+        Cuenta duenos = new Cuenta();
+        duenos.setId(0);
+        duenos.setCorreo("-- No tiene dueño --");
+        duenosList.add(0,duenos);
+        return duenosList;
+    }
+
+
     @GetMapping("/new")
     public String agregarMascota(Model model){
-        model.addAttribute("duenosList",cr.findByAdmin(0));
+        model.addAttribute("duenosList",getListaDuenos());
         model.addAttribute("razaList",rr.findAll());
         return "mascotas/newForm";
     }
@@ -134,7 +141,7 @@ public class MascotaController {
         if (optionalMascota.isPresent()) {
             Mascota mascota = optionalMascota.get();
             model.addAttribute("mascota",mascota);
-            model.addAttribute("duenosList",cr.findByAdmin(0));
+            model.addAttribute("duenosList",getListaDuenos());
             model.addAttribute("razaList",rr.findAll());
             return "mascotas/editForm";
         } else {
