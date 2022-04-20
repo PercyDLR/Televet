@@ -42,19 +42,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="mascota, info : ${listaMascotas}">
+                    <tr th:each="mascota, info : ${listaServicios}">
                         <td th:text="${info.index + 1}"></td>
-                        <td th:text="${mascota.nombre}"></td>
-                        <td th:text="${mascota.anho}"></td>
-                        <td th:text="${mascota.sexo}"></td>
-                        <td th:text="${mascota.getRaza().getId() == 20 ? mascota.otros : mascota.raza.descripcion}"></td>
-                        <td></td>
+                        <td th:text="${mascota.getNombre()}"></td>
+                        <td th:text="${mascota.getAnho()}"></td>
+                        <td th:text="${mascota.getSexo()}"></td>
+                        <td th:text="${mascota.getIdraza() == 20 ? mascota.getRazaotros() : mascota.getRaza()}"></td>
+                        <td th:text="${mascota.getCantidadservicios()}"></td>
 
-                        <td><a class="btn btn-primary" th:href="@{'/mascota/info?id=' + ${mascota.id}}">
+                        <td><a class="btn btn-primary" th:href="@{'/mascota/info?id=' + ${mascota.getIdmascota}}">
                             Detalle de Servicios</a></td>
-                        <td><a class="btn btn-warning" th:href="@{'/mascota/editar?id=' + ${mascota.id}}">
+                        <td><a class="btn btn-warning" th:href="@{'/mascota/editar?id=' + ${mascota.getIdmascota}}">
                             Editar</a></td>
-                        <td><a class="btn btn-danger" th:href="@{'/mascota/borrar?id=' + ${mascota.id}}">
+                        <td><a class="btn btn-danger" th:href="@{'/mascota/borrar?id=' + ${mascota.getIdmascota}}">
                             Eliminar</a></td>
                     </tr>
                 </tbody>

@@ -26,7 +26,7 @@ public class MascotaController {
     @GetMapping(value = {"","/lista"})
     public String listado(Model model){
 
-        model.addAttribute("listaMascotas",mr.findAll());
+        model.addAttribute("listaServicios",mr.listaContadorServicios());
         model.addAttribute("busqueda", null);
         return "mascotas/lista";
     }
