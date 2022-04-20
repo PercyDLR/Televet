@@ -23,8 +23,8 @@
                     <button type="submit" class="btn btn-secondary">Buscar</button>
                 </div>
             </form>
-
-            <table class="table">
+            <h4 class="text-danger my-3" th:if="${listaMascotas.size()==0}">No se han encontrado resultados para su búsqueda</h4>
+            <table class="table" th:if="${listaMascotas.size()!=0}">
                 <thead>
                     <tr>
                         <th>#</th>
