@@ -50,11 +50,11 @@
                         <td th:text="${mascota.getIdraza() == 20 ? mascota.getRazaotros() : mascota.getRaza()}"></td>
                         <td th:text="${mascota.getCantidadservicios()}"></td>
 
-                        <td><a class="btn btn-primary" th:href="@{'/mascota/info?id=' + ${mascota.getIdmascota()}}">
+                        <td><a class="btn btn-primary" th:href="@{'/mascotas/info?id=' + ${mascota.getIdmascota()}}">
                             Detalle de Servicios</a></td>
-                        <td><a class="btn btn-warning" th:href="@{'/mascota/edit?id=' + ${mascota.getIdmascota}}">
+                        <td><a class="btn btn-warning" th:href="@{'/mascotas/edit?id=' + ${mascota.getIdmascota}}">
                             Editar</a></td>
-                        <td><a class="btn btn-danger" th:href="@{'/mascota/delete?id=' + ${mascota.getIdmascota}}">
+                        <td><a class="btn btn-danger" th:href="@{'/mascotas/delete?id=' + ${mascota.getIdmascota}}">
                             Eliminar</a></td>
                     </tr>
                 </tbody>

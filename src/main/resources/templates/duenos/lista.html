@@ -3,11 +3,10 @@
     <head th:replace="fragments/cabecera.html :: cabecera('Lista de Dueños')">
     </head>
     <body>
-        <nav th:replace="fragments/navbar.html :: navbar('dueños')">
-        </nav>
-
         <main>
-            <div class="container px-4 py-5">
+            <div class="container">
+                <nav th:replace="fragments/navbar.html :: navbar('dueños')">
+                </nav>
                 <h1 class="pb-2 border-bottom">Lista de Dueños</h1>
                 <div class="d-flex mt-3 mb-4">
                     <a class="btn btn-primary" th:href="@{'/duenos/new'}">Nuevo Contacto</a>

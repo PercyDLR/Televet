@@ -6,6 +6,7 @@ import com.example.televet.Entity.Raza;
 import com.example.televet.Repository.CuentaRepository;
 import com.example.televet.Repository.MascotaRepository;
 import com.example.televet.Repository.RazaRepository;
+import com.example.televet.Repository.ServicioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,9 @@ public class MascotaController {
 
     @Autowired
     RazaRepository rr;
+
+    @Autowired
+    ServicioRepository servicioRepository;
 
     @GetMapping(value = {"","/lista"})
     public String listado(@RequestParam(required=false,name="search") String search,
@@ -56,7 +60,7 @@ public class MascotaController {
 
     @GetMapping("/info")
     public String detalleServicios(Model model, @RequestParam("id") int id){
-        return "xd";
+        return "mascotas/details";
     }
 
     @GetMapping("/new")
@@ -93,6 +97,8 @@ public class MascotaController {
         } else {
             if (mascota.getId() != 0) {
                 model.addAttribute("mascota", mascota);
+                model.addAttribute("duenosList",cr.findByAdmin(0));
+                model.addAttribute("razaList",rr.findAll());
                 return "mascotas/editForm";
             } else {
                 return "mascotas/newForm";

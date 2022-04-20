@@ -64,4 +64,5 @@ public interface MascotaRepository extends JpaRepository<Mascota,Integer> {
             "group by m.idmascota ", nativeQuery = true)
     List<ServiciosMascotasDto> listaCuenta(String search);
 
+
 }

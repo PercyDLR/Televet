@@ -3,11 +3,11 @@
     <head th:replace="fragments/cabecera.html :: cabecera('Editar Dueño')">
     </head>
     <body>
-        <nav th:replace="fragments/navbar.html :: navbar('dueños')">
-        </nav>
         <main>
-            <div class="container px-4 py-5">
+            <div class="container">
                 <div class="row">
+                    <nav th:replace="fragments/navbar.html :: navbar('dueños')">
+                    </nav>
                     <div class="form-group col-6">
                         <div class="container">
                             <h1 class="pb-2 border-bottom">Editar Contacto</h1>

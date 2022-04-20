@@ -3,11 +3,10 @@
     <head th:replace="fragments/cabecera.html :: cabecera('Nuevo Mascota')">
     </head>
     <body>
-        <nav th:replace="fragments/navbar.html :: navbar('mascotas')">
-        </nav>
-
         <main>
-            <div class="container px-4 py-5">
+            <div class="container">
+                <nav th:replace="fragments/navbar.html :: navbar('mascotas')">
+                </nav>
                 <h1 class="col-md-6 offset-md-3 border-bottom">Nueva Mascota</h1>
                 <div class="col-md-6 offset-md-3">
                     <form method="post" th:action="@{'/mascotas/save'}" class="mt-2">

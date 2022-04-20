@@ -1,0 +1,47 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:replace="fragments/cabecera :: cabecera('Lista de Mascotas en Televet')"></head>
+    <body>
+
+        <div class="container">
+            <div th:replace="fragments/navbar :: navbar('mascotas')"></div>
+
+            <h1>Detalle de servicios</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID Servicio</th>
+                        <th>Nombre</th>
+                        <th>Edad</th>
+                        <th>Hora de inicio</th>
+                        <th>Duracion</th>
+                        <th>Entrega</th>
+                        <th>Responsable</th>
+                        <th>Opciones de servicio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="mascota, info : ${listaMascotas}">
+                        <td th:text="${info.index + 1}"></td>
+                        <td th:text="${mascota.getId()}"></td>
+                        <td th:text="${mascota.getMascota().getNombre()}"></td>
+                        <td th:text="${edad}"></td>
+                        <td th:text="${mascota.getHoraInicio()}"></td>
+                        <td th:text="${mascota.getDuracion()}"></td>
+                        <td th:text="${mascota.getEntrega()}"></td>
+                        <td th:text="${mascota.getResponsable().getNombre()}"></td>
+                        <td th:text="${mascota.getOpciones()}"></td>
+                        <td th:text="${mascota.getCuenta().getId()}"></td>
+
+                        <td><a class="btn btn-primary" th:href="@{'/mascota/info?id=' + ${mascota.getMascota().getId()}}">
+                            Detalle de Servicios</a></td>
+                        <td><a class="btn btn-warning" th:href="@{'/mascota/editar?id=' + ${mascota.getMascota().getId()}}">
+                            Editar</a></td>
+                        <td><a class="btn btn-danger" th:href="@{'/mascota/borrar?id=' + ${mascota.getMascota().getId()}}">
+                            Eliminar</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

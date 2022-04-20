@@ -3,11 +3,10 @@
     <head th:replace="fragments/cabecera.html :: cabecera('Nuevo Dueño')">
     </head>
     <body>
-        <nav th:replace="fragments/navbar.html :: navbar('dueños')">
-        </nav>
-
         <main>
-            <div class="container px-4 py-5">
+            <div class="container">
+                <nav th:replace="fragments/navbar.html :: navbar('dueños')">
+                </nav>
                 <h1 class="col-md-6 offset-md-3 border-bottom">Nuevo Contacto</h1>
                 <div class="col-md-6 offset-md-3">
                     <form method="post" th:action="@{'/duenos/save'}" class="mt-2">

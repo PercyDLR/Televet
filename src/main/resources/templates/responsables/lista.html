@@ -2,8 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head th:replace="fragments/cabecera.html :: cabecera('Lista de Responsables')"></head>
     <body>
-        <head th:replace="fragments/navbar.html :: navbar('responsables')"></head>
         <div class="container">
+            <head th:replace="fragments/navbar.html :: navbar('responsables')"></head>
             <h1>Lista de Responsables</h1>
             <a class="btn btn-primary mt-4 mb-4" th:href="@{/responsables/nuevo}">Nuevo Responsable</a>
             <div th:if="${msg!=null}" class="alert alert-success" th:text="${msg}"></div>
