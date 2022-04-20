@@ -1,10 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
-    </head>
-    <body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
+    <head th:replace="fragments/cabecera :: cabecera('Lista de Mascotas en Televet')"></head>
+    <body>
+        <div class="container">
+            <h1>Lista de Mascotas en Televet</h1>
+            <a class="btn btn-primary mt-4 mb-4" th:href="@{/mascotas/crear}">Nueva Mascota</a>  <!-- COMPLETAR -->
+
+            <!--
+            <div class="alert alert-success" th:text="${msg}" th:if="${msg != null}"></div>
+            -->
+
+            <form method="post" th:action="@{/mascotas/buscar}">
+                <div class="input-group">
+                    <select name="filtro">
+                        <option value="" selected>Todos</option>
+                        <option value="sexo">Sexo</option>
+                        <option value="raza">Raza</option>
+                        <option value="contacto">Contacto</option>
+                    </select>
+                    <input name="busqueda" th:value="${busqueda == null ? null : busqueda}" class="form-control" type="text" placeholder="Buscar"/>
+                    <button type="submit" class="btn btn-secondary">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </form>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Año</th>
+                        <th>Sexo</th>
+                        <th>Raza</th>
+                        <th>Servicios</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="mascota, info : ${listaMascotas}">
+                        <td th:text="${info.index + 1}"></td>
+                        <td th:text="${mascota.nombre}"></td>
+                        <td th:text="${mascota.anho}"></td>
+                        <td th:text="${mascota.sexo}"></td>
+                        <td th:text="${mascota.getRaza().getId() == 20 ? mascota.otros : mascota.raza.descripcion}"></td>
+                        <td></td>
+
+                        <td><a class="btn btn-primary" th:href="@{'/mascota/edit?id=' + ${mascota.id}}">
+                            Detalle de Servicios</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </body>
 </html>
