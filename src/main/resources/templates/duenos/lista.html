@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/cabecera.html :: cabecera('Lista de Dueños')">
     </head>
     <body>
+        <nav th:replace="fragments/navbar.html :: navbar('dueños')">
+        </nav>
 
+        <main>
+            <div class="container px-4 py-5">
+                <h1 class="pb-2 border-bottom">Lista de Dueños</h1>
+                <div class="d-flex mt-3 mb-4">
+                    <a class="btn btn-primary" th:href="@{'/duenos/new'}">Nuevo Contacto</a>
+                    <a class="btn btn-secondary ms-auto" th:href="@{'/'}">Regresar</a>
+                </div>
+
+                <table class="table">
+                    <tr>
+                        <th>#</th>
+                        <th>Correo del dueño</th>
+                        <th>Dirección</th>
+                        <th>Teléfono</th>
+                        <th>#Mascotas</th>
+                        <th></th>
+                    </tr>
+                    <tr th:each="duenos, info : ${duenosList}">
+                        <td th:text="${info.index + 1}"></td>
+                        <td th:text="${duenos.getCorreo()}"></td>
+                        <td th:text="${duenos.getDireccion()}"></td>
+                        <td th:text="${duenos.getTelefono()}"></td>
+                        <td th:text="${duenos.getCantidadmascotas()}"></td>
+                        <td><a class="btn btn-primary" th:href="@{'/duenos/edit' + '?id=' + ${duenos.idcuenta}}">Ver más</a></td>
+                    </tr>
+                </table>
+            </div>
+        </main>
     </body>
 </html>
