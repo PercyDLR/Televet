@@ -120,6 +120,9 @@ public class MascotaController {
             attr.addFlashAttribute("msg", "Mascota actualizada exitosamente");
         }
         if (mascota.getNombre() != null) {
+            if(mascota.getRaza().getId()!=20){
+                mascota.setOtros(null);
+            }
             mr.save(mascota);
             return "redirect:/mascotas";
         } else {

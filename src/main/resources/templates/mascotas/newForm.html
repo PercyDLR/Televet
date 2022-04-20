@@ -34,14 +34,21 @@
                             </select>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="raza" class="form-label">Raza: </label>
-                            <select class="form-select mb-3" name="raza" id="raza">
-                                <option th:each="raza : ${razaList}"
-                                        th:text="${raza.descripcion}"
-                                        th:value="${raza.id}"></option>
-                            </select>
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label for="raza" class="form-label">Raza: </label>
+                                <select class="form-select mb-3" name="raza" id="raza">
+                                    <option th:each="raza : ${razaList}"
+                                            th:text="${raza.descripcion}"
+                                            th:value="${raza.id}"></option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label">Otro (Especifique):</label>
+                                <input type="text" class="form-control" name="otros">
+                            </div>
                         </div>
+
 
                         <div class="mb-3">
                             <label for="cuenta" class="form-label">Dueño: </label>
