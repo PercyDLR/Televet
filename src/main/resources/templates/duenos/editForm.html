@@ -57,7 +57,7 @@
                                 <td th:text="${mascota.nombre}"></td>
                                 <td th:text="${mascota.raza.descripcion}"></td>
                                 <td th:text="${mascota.sexo}"></td>
-                                <td><a class="btn btn-primary" th:href="@{'/mascota/delete' + '?id=' + ${mascota.id}}">Borrar</a></td>
+                                <td><a class="btn btn-primary" th:href="@{'/mascotas/delete' + '?id=' + ${mascota.id}}">Borrar</a></td>
                             </tr>
                         </table>
                     </div>
